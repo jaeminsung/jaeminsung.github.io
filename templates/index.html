@@ -1,0 +1,169 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,minimum-scale=1.0,maximum-scale=1.0">
+    <meta name="theme-color" content="#ffffff">
+    <title>Jaemin Sung Portfolio</title>
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}">
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet" type="text/css">
+    <link href='https://fonts.googleapis.com/css?family=Source+Code+Pro' rel='stylesheet' type='text/css'>
+
+    <!-- JS --> 
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/isotope.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/function.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/angular.js') }}" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='js/respond.js') }}" type="text/javascript"></script>
+    <script type="text/javascript">
+      function sizeContainer(initial) {
+        var containerSize = 290; //size of container including padding+margin. adjust if you adjust size of boxes
+        var $cont = $('.portfolio-container')
+        var currWidth = $cont.width();
+        var windowWidth = $(this).width();
+        console.log(currWidth + ":" + windowWidth)
+        var currCols = Math.floor(currWidth/containerSize);
+        var possCols = Math.floor(windowWidth/containerSize);
+        if (currCols != possCols) {
+          $cont.width(possCols*containerSize);
+          if(!initial) {
+            setTimeout(function(){
+              $cont.isotope('reLayout', function(){console.log('relayedout')});
+            },275) //this time needs to be greater than the animation time for the container div
+          }
+        }
+      }
+      $(document).ready(function() {
+          sizeContainer(true);
+            $('.portfolio-container').isotope({
+              // options
+              itemSelector : '.portfolio-item',
+              resizesContainer: true,
+              layoutMode : 'masonry'
+            });
+          
+          $(window).resize(function(){
+            sizeContainer(false);
+          });
+          
+          $(".portfolio-item").click(function(){
+               window.location=$(this).find("a").attr("href");
+               return false;
+               
+          });
+              
+      });
+      </script>
+  </head>
+  <body>
+    <section class="primary-nav">
+      <a class="logo" href="/">Jaemin Sung</a>
+      <nav>
+        <a href="mailto:jaeminsung@gmail.com?subject=Interested in a Project!&body=Hey Jaemin, I got a Project!">Contact</a>
+        <a href="#portfolio">Portfolio</a>  
+      </nav>  
+    </section>
+    
+    <section id="main">
+      <section id="intro" class="bordering" style="padding-bottom:20px; padding-top:20px;background: url(https://www.coinbase.com/assets/home/bg2-f5c3b6fc64657e2d4e39b570606edab9751285904e8cbf7af2520f98c4d41abf.png) no-repeat #2e5785;" >
+        <div class="macbook">
+          <div class="lid">
+            <div class="bezel">
+              <div class="screen">
+                <div class="screen-content">
+                  <p class="sourcecode">{</p>
+                  <p class="sourcecode" style=" text-indent: 3em;"><b style="color: #EC407A; width: 90px; display: inline-block; float:left;">name:</b> "Jaemin Sung",</p>
+                  <p class="sourcecode" style=" text-indent: 3em;"><b style="color: #43A047; width: 90px; display: inline-block; float:left;">work:</b> [ "Software Engineer", "Capital One" ],</p>
+                  <p class="sourcecode" style=" text-indent: 3em;"><b style="color: #FF5722; width: 90px; display: inline-block; float:left;">skills:</b> [ "DevOps Engineering", "Full Stack Development", "AWS" ],</p>
+                  <p class="sourcecode" style=" text-indent: 3em;"><b style="color: #009688; width: 90px; display: inline-block; float:left;">languages:</b> [ "Java", "Python", "JavaScript" ],</p>
+                  <p class="sourcecode" style=" text-indent: 3em;"><b style="color: #29B6F6; width: 90px; display: inline-block; float:left;">interests:</b> [ "Machine Learning", "FinTech", "Blockchain" ],</p>
+                  <p class="sourcecode" style=" text-indent: 3em;"><b style="color: #5C6BC0; width: 90px; display: inline-block; float:left;">links:</b> [ "<a class="introlinks" href="https://github.com/jaeminsung/">Github</a>", "<a class="introlinks" href="https://www.linkedin.com/in/jaemin-sung-06729783">LinkedIn</a>" ], </p>
+                  <p class="sourcecode" style=" text-indent: 3em";><b style="color: #AB47BC; width: 90px; display: inline-block; float:left;" >email:</b> "jaeminsung@gmail.com"</p>
+                  <p class="sourcecode">}</p>
+                  <div style="text-align: center">
+                    <form method="get" action="{{ url_for('static', filename='JaeminSungResume2017.pdf') }}">
+                      <button type="submit" class="btn btn-block btn-lg btn-inverse" style="border-radius:4px; background-color: #26A65B; border-color: #26A65B">Get My Resume</button>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <div class="camera"></div>
+            </div>
+
+          </div>
+          <div class="base">
+            <div class="groove">
+            </div>
+          </div>
+        </div>
+      </section>
+      <section id="portfolio" class="portfolio" style="background: url({{ url_for('static', filename='img/portfolio-back.jpg') }}) no-repeat #F1F1F1;">
+        <h1>
+          PORTFOLIO
+        </h1>
+        <div class="portfolio-container" style="width: 1160px; position: relative; overflow: hidden; height: 1371px;">
+          <!-- Survivors Rights Map -->
+          <div class="portfolio-item">
+            <h5>Survivors Rights Map</h5>
+            <div class="img-container" style="padding-top:5px; padding-bottom:5px">
+              <a href="https://github.com/jaeminsung/survivors-rights-map"><img class="perish" src="{{ url_for('static', filename='img/survivors-map.png') }}" alt="survivors"></a>
+            </div>
+            <p>
+              Survivors' Rights Map is an interactive US map that tracks progress on implementation of legal protections for sexual assault survivors in all 50 states.
+              <br>
+              <br>
+              This map is actively used by Rise, a national	civil	rights	nonprofit	that works	with	multiple	
+              state	legislatures	and	U.S.	Congress	to	establish	legal	measures	to	protect	sexual	assault	survivors.
+            </p>
+          </div>
+          <!-- ML-based Stock Trading -->
+          <div class="portfolio-item">
+            <h5>Machine Learning x Stock Trading</h5>
+            <div class="img-container" style="padding-top:5px; padding-bottom:5px">
+              <a href="https://github.com/jaeminsung/ml_stock_trading"><img src="{{ url_for('static', filename='img/ml-stock.png') }}" alt="stock"></a>
+            </div>
+            <p>
+              Machine Learning x Stock Trading is a powerful Python tool to predict an individual stock's price movement in N days. 
+              <br>
+              <br>
+              Using SVM in Scikit-Learn, the prediction accuracy can reach ~65%. The learning model is trained using daily technical indicators, such as momentum, RSI, and CCI. 
+            </p>
+          </div>
+          <!-- AWS Lambda x MongoDB -->
+          <div class="portfolio-item">
+            <h5>AWS Lambda x MongoDB</h5>
+            <div class="img-container">
+              <a href="https://github.com/jaeminsung/aws-lambda-mongodb-backup"><img src="{{ url_for('static', filename='img/aws-lambda-mongo-s3.png') }}" alt="lambda"></a>
+            </div>
+            <p>
+              AWS Lambda x MongoDB is a simple AWS Lambda function that creates a backup file of a MongoDB database and store the file in a S3 bucket. 
+              <br>
+              <br>
+              This Lambda function is a perfect tool for taking a snapshot of your MongoDB and store it in a resilient storage system on AWS.
+            </p>
+          </div>
+          <!-- Kafka Monitoring API -->
+          <div class="portfolio-item">
+            <h5>Kafka Monitoring API</h5>
+            <div class="img-container">
+              <a href="https://github.com/jaeminsung/kafka-monitoring-rest-api"><img src="{{ url_for('static', filename='img/kafka-monitoring.png') }}" alt="kafka"></a>
+            </div>
+            <p>
+              Kafka Monitoring API is a RESTful API that provides topic offset info as well as health check on Kafka brokers.
+              <br>
+              <br>
+              This API can be integrated into a monitoring solution for a Kafka cluster.
+            </p>
+          </div>
+    </section>
+  <footer style="background-color: #663399">
+
+    <p>© 2017 Jaemin Sung. All rights reserved.</p>
+    
+  </footer>
+  </body>
+</html>
+
